@@ -9,6 +9,8 @@ import cookieParser from "cookie-parser";
 dotenv.config();
 
 import authRoutes from "./routes/auth";
+import postRoutes from "./routes/posts";
+import subRoutes from "./routes/subs";
 
 const app = express();
 
@@ -20,9 +22,13 @@ app.use(cookieParser());
 app.get("/", (req, res) => res.send("hello world"));
 
 app.use("/api/auth", authRoutes);
+app.use("/api/posts", postRoutes);
+app.use("/api/subs", subRoutes);
 
-app.listen(process.env.PORT, async () => {
-  console.log("Running on http://localhost:5000");
+const PORT = process.env.PORT;
+
+app.listen(PORT, async () => {
+  console.log(`Running on http://localhost:${PORT}`);
   try {
     await createConnection();
     console.log("Database Connected 🎉");
