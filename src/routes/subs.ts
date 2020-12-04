@@ -3,11 +3,7 @@ import { isEmpty, validate } from "class-validator";
 import { getRepository } from "typeorm";
 import User from "../entities/User";
 import Sub from "../entities/Sub";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import cookie from "cookie";
 import auth from "../middleware/auth";
-import Post from "../entities/Post";
 
 const createSub = async (req: Request, res: Response) => {
   const { name, title, description } = req.body;
