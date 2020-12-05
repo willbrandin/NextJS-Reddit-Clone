@@ -35,7 +35,7 @@ const register = async (req: Request, res: Response) => {
   }
 };
 
-const login = async (req: Request, res, Response) => {
+const login = async (req: Request, res: Response) => {
   const { username, password } = req.body;
 
   try {
@@ -58,7 +58,7 @@ const login = async (req: Request, res, Response) => {
       return res.status(404).json({ error: "User not found" });
     }
 
-    const token = jwt.sign({ username }, process.env.JWT_SECRET);
+    const token = jwt.sign({ username }, process.env.JWT_SECRET!);
 
     res.set(
       "Set-Cookie",
@@ -82,7 +82,7 @@ const me = (_: Request, res: Response) => {
   return res.json(res.locals.user);
 };
 
-const logout = (req: Request, res: Response) => {
+const logout = (_: Request, res: Response) => {
   res.set(
     "Set-Cookie",
     cookie.serialize("token", "", {
