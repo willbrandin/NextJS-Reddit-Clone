@@ -17,7 +17,7 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <Fragment>
       {!isAuthRoute && <Navbar />}
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </Fragment>
   );
 }
