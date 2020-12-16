@@ -28,6 +28,7 @@ const getPosts = async (_: Request, res: Response) => {
   try {
     const posts = await Post.find({
       order: { createdAt: "DESC" },
+      relations: ["comments", "comments.votes", "sub", "votes"],
     });
     return res.json(posts);
   } catch (error) {
@@ -64,7 +65,6 @@ const commentOnPost = async (req: Request, res: Response) => {
     });
 
     const comment = new Comment({ body, user, post });
-
     await comment.save();
 
     return res.json(comment);
