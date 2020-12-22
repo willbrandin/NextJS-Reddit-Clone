@@ -20,13 +20,12 @@ import { Exclude } from "class-transformer";
 export default class Comment extends Entity {
   constructor(comment: Partial<Comment>) {
     super();
-
     Object.assign(this, comment);
   }
 
   @Index()
   @Column()
-  identifier: string; // 7 character id
+  identifier: string;
 
   @Column()
   body: string;

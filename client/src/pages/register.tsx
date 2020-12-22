@@ -5,6 +5,7 @@ import Head from "../components/head";
 import { useRouter } from "next/router";
 
 import { InputGroup } from "../components/InputGroup";
+import { useAuthState } from "../context/auth";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -12,8 +13,13 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [agreement, setAgreement] = useState(false);
   const [errors, setErrors] = useState<any>({});
+  const { authenticated } = useAuthState();
 
   const router = useRouter();
+
+  if (authenticated) {
+    router.push("/");
+  }
 
   const submitForm = async (event: FormEvent) => {
     event.preventDefault();

@@ -1,31 +1,22 @@
-import Axios from "axios";
-import React, { useState, useEffect, Fragment } from "react";
+import React, { Fragment } from "react";
 import Head from "../components/head";
-import { Post } from "../types";
 import PostCard from "../components/PostCard";
+import useSwr from "swr";
 
 const Home = () => {
-  const [posts, setPosts] = useState<Post[]>([]);
-
-  useEffect(() => {
-    Axios.get("/posts")
-      .then((res) => setPosts(res.data))
-      .catch((err) => console.log(err));
-  }, []);
-
-  console.log(posts);
+  const { data: posts } = useSwr("/posts");
 
   return (
-    <div className="pt-12">
+    <Fragment>
       <Head title="readit: The Front Page of the Internet" />
       <div className="container flex pt-4">
         <div className="w-160">
-          {posts.map((post) => (
-            <PostCard post={post} />
+          {posts?.map((post) => (
+            <PostCard post={post} key={post.identifier} />
           ))}
         </div>
       </div>
-    </div>
+    </Fragment>
   );
 };
 

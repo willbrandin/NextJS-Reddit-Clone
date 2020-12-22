@@ -1,5 +1,5 @@
 import { IsEmail, Length } from "class-validator";
-import brcrypt from "bcrypt";
+import bcrypt from "bcrypt";
 import {
   Entity as TOEntity,
   Column,
@@ -16,29 +16,23 @@ import Vote from "./Vote";
 export default class User extends Entity {
   constructor(user: Partial<User>) {
     super();
-
     Object.assign(this, user);
   }
 
   @Index()
-  @IsEmail(undefined, { message: "Must be a valid email address." })
-  @Length(1, 255, {
-    message: "Email is empty.",
-  })
+  @IsEmail(undefined, { message: "Must be a valid email address" })
+  @Length(1, 255, { message: "Email is empty" })
   @Column({ unique: true })
   email: string;
 
-  @Length(3, 255, {
-    message: "Must be at least 3 characters long.",
-  })
+  @Index()
+  @Length(3, 255, { message: "Must be at least 3 characters long" })
   @Column({ unique: true })
   username: string;
 
   @Exclude()
-  @Length(6, 255, {
-    message: "Must be at least 6 characters long.",
-  })
   @Column()
+  @Length(6, 255, { message: "Must be at least 6 characters long" })
   password: string;
 
   @OneToMany(() => Post, (post) => post.user)
@@ -49,6 +43,6 @@ export default class User extends Entity {
 
   @BeforeInsert()
   async hashPassword() {
-    this.password = await brcrypt.hash(this.password, 6);
+    this.password = await bcrypt.hash(this.password, 6);
   }
 }

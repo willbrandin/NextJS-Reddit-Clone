@@ -19,13 +19,12 @@ import User from "./User";
 export default class Post extends Entity {
   constructor(post: Partial<Post>) {
     super();
-
     Object.assign(this, post);
   }
 
   @Index()
   @Column()
-  identifier: string; // 7 character id
+  identifier: string; // 7 Character Id
 
   @Column()
   title: string;

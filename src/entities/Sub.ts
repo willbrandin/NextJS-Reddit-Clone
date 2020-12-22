@@ -14,7 +14,6 @@ import User from "./User";
 export default class Sub extends Entity {
   constructor(sub: Partial<Sub>) {
     super();
-
     Object.assign(this, sub);
   }
 
@@ -39,5 +38,5 @@ export default class Sub extends Entity {
   user: User;
 
   @OneToMany(() => Post, (post) => post.sub)
-  posts: [Post];
+  posts: Post[];
 }
