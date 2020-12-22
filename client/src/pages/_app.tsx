@@ -1,6 +1,7 @@
 import { AppProps } from "next/app";
 import Axios from "axios";
 import "../styles/tailwind.css";
+import "../styles/icons.css";
 import { Fragment } from "react";
 import { Navbar } from "../components/Navbar";
 import { useRouter } from "next/router";
